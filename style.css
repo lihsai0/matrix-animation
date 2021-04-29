@@ -1,0 +1,140 @@
+/*
+vsersion 0.0.0. Will delete, if make sure useless.
+.animating {
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-play-state: paused;
+  animation-delay: calc(var(--process) * -3s);
+  animation-fill-mode: both;
+}
+
+.auto-animating {
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes matrix-s0 {
+  0% {
+    transform: matrix(1, 0, 0, 1, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: matrix(1.5, 0, 0, 0.5, 0, 0);
+  }
+} */
+
+
+svg {
+  overflow: visible;
+}
+
+svg * {
+  box-sizing: content-box !important;
+}
+
+.container {
+  display: flex;
+  align-items : center;
+  flex-direction: column;
+}
+
+.container * {
+  box-sizing: border-box;
+}
+
+.coordinate-container {
+  padding: 30px;
+  width: 330px;
+  height: 330px;
+  overflow: visible;
+}
+
+.matrix-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+}
+.matrix-input .matrix-name {
+  flex: none;
+}
+.matrix-input .square-bracket {
+  font-size: 60px;
+  font-weight: lighter;
+  margin-top: -8px;
+}
+.matrix-input .matrix {
+  flex: 0 1 auto;
+  display: grid;
+  grid-template-areas: 
+    "a b"
+    "c d";
+  gap: 10px;
+  width: 120px;
+}
+.matrix-input .matrix .el {
+  display: inline-block;
+}
+.matrix-input .matrix .el input {
+  display: inline-block;
+  border: 1px solid #EEEEEE;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: all 300ms ease;
+}
+.matrix-input .matrix .el input:focus {
+  outline: none;
+  border-color: #21AAEE;
+}
+
+.controllers {
+  text-align: center;
+  margin: 20px 20px;
+}
+
+.btn {
+  /* reset */
+  background: none;
+  border: 1px solid #CCCCCC;
+  /* styles */
+  transition: all 200ms ease;
+  cursor: pointer;
+}
+
+.controllers .btn-play {
+  /* styles */
+  border: 1px solid #21AAEE;
+  color: #21AAEE;
+  width: 64px;
+  height: 36px;
+  font-size: 20px;
+}
+.controllers .btn-play:hover {
+  background-color: #21AAEE;
+  color: #FFFFFF;
+}
+
+
+.controllers .btn-reset {
+  /* styles */
+  border: 1px solid #999999;
+  color: #999999;
+  width: 120px;
+  height: 36px;
+  font-size: 20px;
+}
+.controllers .btn-reset:hover {
+  background-color: #999999;
+  color: #FFFFFF;
+}
+
+#autoPlayInput:checked ~ .btn-play,
+#autoPlayInput:checked ~ .btn-reset,
+#autoPlayInput:checked ~ #progressInput,
+#autoPlayInput:checked ~ #progressResult {
+  display: none;
+}
