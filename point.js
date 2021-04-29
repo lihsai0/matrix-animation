@@ -81,8 +81,8 @@ export default class Point {
     const x = this.x - this.originX
     const y = this.y - this.originY
 
-    this.x = a * x + b * y + e + this.originX
-    this.y = c * x + d * y + f + this.originY
+    this.x = a * x - b * y + e + this.originX
+    this.y = -c * x + d * y + f + this.originY
     return this
   }
 

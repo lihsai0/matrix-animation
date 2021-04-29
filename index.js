@@ -164,7 +164,7 @@ function getMatrix() {
     .each(function() {
       values.push(d3.select(this).property('value'))
     })
-  const [a, c, b, d] = values.map(v => parseFloat(v))
+  const [a, b, c, d] = values.map(v => parseFloat(v))
   return [a, b, c, d, 0, 0]
 }
 
@@ -188,6 +188,7 @@ window.resetSvg = resetSvg
 
 function playAnimation() {
   const m = getMatrix()
+  console.log('lihs debug:', m)
   if (m.some(Number.isNaN)) {
     Notification.error('You Input Some Invalid Number!')
     return
