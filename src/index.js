@@ -2,8 +2,10 @@ import * as d3 from 'd3'
 import d3Injector from "./d3-injector"
 
 import './style.css'
-import Point from './point.js'
-import svgDefs from './matrix-coordinate.defs.svg'
+import Point from './utils/point.js'
+
+import svgDefs from './data/matrix-coordinate.defs.svg'
+import coorJson from './data/matrix-coordinate.json'
 
 d3Injector(d3)
 
@@ -19,10 +21,8 @@ const Notification = {
 }
 
 async function main() {
-  [this.svgDocument, {default: this.coordinateJson}] = await Promise.all([
-    d3.svg(svgDefs),
-    import('./matrix-coordinate.json'),
-  ])
+  this.svgDocument = await d3.svg(svgDefs)
+  this.coordinateJson = coorJson
 
   this.viewBox = [0, 0, 200, 200]
 
@@ -134,7 +134,7 @@ function getLines(lines, size=[0, 0, 1, 1]) {
 }
 
 function renderLines(selection, className, lines, attrs={}) {
-  const updateSelection = selection.selectAll(`.${className}`).data(lines)
+  const updateSelection = selection.selectAll(`.${className}`).data(lines, (d, i) => d.id || i)
   updateSelection
     .interrupt()
     .transition()

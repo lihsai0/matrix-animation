@@ -72,7 +72,15 @@ export default class Point {
     return this
   }
 
-  matrix(a, b, c, d, e, f, newpt = false) {
+  matrix(
+    a = 1,
+    b = 0,
+    c = 0,
+    d = 1,
+    e = 0,
+    f = 0,
+    newpt = false,
+  ) {
     if (newpt) {
       const npt = this.clone()
       return npt.matrix(a, b, c, d)
