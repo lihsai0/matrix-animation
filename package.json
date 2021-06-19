@@ -1,0 +1,37 @@
+{
+  "name": "matrix-animation",
+  "version": "1.0.0",
+  "description": "animation for coordinate transformation by matrix",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack serve --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lihsai0/matrix-animation.git"
+  },
+  "keywords": [
+    "linear",
+    "algebra",
+    "matrix"
+  ],
+  "author": "lihsai0<lihsai0@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/lihsai0/matrix-animation/issues"
+  },
+  "homepage": "https://github.com/lihsai0/matrix-animation#readme",
+  "devDependencies": {
+    "css-loader": "^5.2.6",
+    "html-webpack-plugin": "^5.3.1",
+    "mini-css-extract-plugin": "^1.6.0",
+    "webpack": "^5.39.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "d3": "^7.0.0"
+  }
+}

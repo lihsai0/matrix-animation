@@ -1,4 +1,11 @@
+import * as d3 from 'd3'
+import d3Injector from "./d3-injector"
+
+import './style.css'
 import Point from './point.js'
+import svgDefs from './matrix-coordinate.defs.svg'
+
+d3Injector(d3)
 
 const TransitionDuration = 3000
 const AutoPlayInterval = 5000
@@ -12,9 +19,9 @@ const Notification = {
 }
 
 async function main() {
-  [this.svgDocument, this.coordinateJson] = await Promise.all([
-    d3.svg('./matrix-coordinate.defs.svg'),
-    d3.json('./matrix-coordinate.json'),
+  [this.svgDocument, {default: this.coordinateJson}] = await Promise.all([
+    d3.svg(svgDefs),
+    import('./matrix-coordinate.json'),
   ])
 
   this.viewBox = [0, 0, 200, 200]
@@ -188,7 +195,6 @@ window.resetSvg = resetSvg
 
 function playAnimation() {
   const m = getMatrix()
-  console.log('lihs debug:', m)
   if (m.some(Number.isNaN)) {
     Notification.error('You Input Some Invalid Number!')
     return
@@ -238,9 +244,5 @@ function toggleAutoPlay() {
 window.toggleAutoPlay = toggleAutoPlay
 
 window.onload = function() {
-  // const autoPlayInput = document.getElementById('autoPlayInput')
-  // const progressInput = document.getElementById('progressInput')
-  // const progressOutput = document.getElementById('progressOutput')
-
   main.call(data)
 }
