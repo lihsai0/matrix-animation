@@ -37,6 +37,33 @@ async function main() {
 
   this.linesContainer = svgGroupContainer.append('g')
     .classed('lines-container', true)
+
+  data.presetName = 'custom'
+  data.presetDemos = {
+    custom: coorJson
+  }
+  Promise.all([
+    import('./data/book-demo-s0.json'),
+    import('./data/book-demo-s1.json'),
+    import('./data/book-demo-s2.json'),
+    import('./data/book-demo-s3.json'),
+    import('./data/book-demo-s4.json'),
+    import('./data/book-demo-s5.json'),
+    import('./data/book-demo-s6.json'),
+    import('./data/book-demo-s7.json'),
+    import('./data/book-demo-s8.json'),
+    import('./data/book-demo-s9.json'),
+  ]).then(presets => {
+    presets.forEach(preset => {
+      data.presetDemos[preset.default.name] = {
+        ...coorJson,
+        ...preset.default,
+      }
+    })
+    d3.select('#presetSelect')
+      .classed('hidden', false)
+  })
+
   resetSvg()
 
   // 绘制坐标轴
@@ -172,18 +199,35 @@ function getMatrix() {
       values.push(d3.select(this).property('value'))
     })
   const [a, b, c, d] = values.map(v => parseFloat(v))
-  return [a, b, c, d, 0, 0]
+  return [a, b, c, d]
 }
 
 function resetSvg() {
-  data.bgLines = getGridLines(data.coordinateJson.grids.x, data.coordinateJson.grids.y, data.viewBox)
+  const preset = data.presetDemos[data.presetName]
+  const initMatrix = preset.initMatrix
+
+  data.bgLines = getGridLines(preset.grids.x, preset.grids.y, data.viewBox)
+  if (initMatrix) {
+    data.bgLines = data.bgLines.map(line => ({
+      ...line,
+      startPoint: line.startPoint.matrix(...initMatrix),
+      endPoint: line.endPoint.matrix(...initMatrix),
+    }))
+  }
   renderLines(
     data.bgLinesContainer,
     'grid-lines',
     data.bgLines,
     data.coordinateJson.grids.attrs,
   )
-  data.lines = getLines(data.coordinateJson.lines, data.viewBox)
+  data.lines = getLines(preset.lines, data.viewBox)
+  if (initMatrix) {
+    data.lines = data.lines.map(line => ({
+      ...line,
+      startPoint: line.startPoint.matrix(...initMatrix),
+      endPoint: line.endPoint.matrix(...initMatrix),
+    }))
+  }
   renderLines(
     data.linesContainer,
     'lines',
@@ -242,6 +286,20 @@ function toggleAutoPlay() {
   }
 }
 window.toggleAutoPlay = toggleAutoPlay
+
+function handleChangePreset() {
+  data.presetName = d3.select('#presetSelect').property('value')
+  const preset = data.presetDemos[data.presetName]
+
+  d3.selectAll('.matrix-input .el input')
+    // TODO: no array function
+    .each(function(d, i) {
+      d3.select(this).property('value', preset.matrix[i])
+    })
+
+  resetSvg()
+}
+window.handleChangePreset = handleChangePreset
 
 window.onload = function() {
   main.call(data)

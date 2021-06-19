@@ -22,6 +22,24 @@
         <div class="square-bracket">]</div>
       </form>
       <form class="controllers">
+        <label>
+          Preset:
+          <select name="preset" id="presetSelect" class="hidden" onchange="handleChangePreset(event)">
+            <option value="custom" selected>Custom</option>
+            <option value="s0">s0</option>
+            <option value="s1">s1</option>
+            <option value="s2">s2</option>
+            <option value="s3">s3</option>
+            <option value="s4">s4</option>
+            <option value="s5">s5</option>
+            <option value="s6">s6</option>
+            <option value="s7">s7</option>
+            <option value="s8">s8</option>
+            <option value="s9">s9</option>
+          </select>
+          <span>loading</span>
+        </label>
+        <div></div>
         <input name="autoPlay" id="autoPlayInput" type="checkbox" onchange="toggleAutoPlay(event)">
         <label for="autoPlayInput">auto play</label>
         <div></div>
