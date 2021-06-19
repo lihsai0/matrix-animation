@@ -26,8 +26,12 @@ Open `index.html` in your browser(best is latest Chrome).
 ## TODOs
 
 - [ ] Able to set arrow vector
-- [ ] Demos of 《程序员的数学3 线性代数》（ISBN: 9787115417749）
+- [x] Demos of 《程序员的数学3 线性代数》（ISBN: 9787115417749）
 - [ ] Show cursor coordinate of SVG
 - [ ] Control animation process with input\[type="range"\]
-- [ ] Refactoring JS Files
+- [ ] Refactoring JS Files(33%)
+  - [x] Add packaging tools
+  - [ ] Split index.js to modules
+  - [ ] Add TypeScript
 - [ ] Deploy to a free serverless platform
+- [ ] Optimize webpack config
