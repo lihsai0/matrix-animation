@@ -19,9 +19,18 @@ It will be aslo transform the `stroke-width` and more in this way. What wanted i
 
 ## Usage
 
-Just clone this repo or download source zip.
+Download [matrix-animation.zip](https://github.com/lihsai0/matrix-animation/releases).
 
-Open `index.html` in your browser(best is latest Chrome).
+Open `index.html` in your browser(best is latest Chrome) by a http(s) server.
+
+For example:
+
+``` shell
+unzip matrix-animation.zip -d matrix-animation
+cd matrix-animation
+python3 -m http.server
+# open http://localhost:8000/
+```
 
 ## TODOs
 
